@@ -10,3 +10,12 @@
 - The final target-app connected screen was not verified before environment disruption. Do not describe this as completed end-to-end wallet validation.
 - Opening the faucet coincided with execution environment loss/recovery and an unresponsive browser operation. No faucet claim, funded balance, signed transaction, deposit, withdrawal, or end-to-end application behavioral pass was verified.
 - No private keys, pairing URLs, QR codes, or session credentials are retained here. A later run must create/recover its own authorized session and independently verify each untested stage.
+
+## 2026-11-12 recovered-session continuation
+
+- Created a new disposable UI-only testnet signer after browser reset; reciprocal connector-code pairing completed again.
+- Claimed the minimum offered faucet amount, 10,000 test CKB, without a CAPTCHA prompt. Explorer verified output to the disposable address with two confirmations in block 23,038,043: https://testnet.explorer.nervos.org/transaction/0x86f893c63d2c4fc55b9b582afe69dc4973a565135700b068542f5f9475400ff2 .
+- Approved the explicit `ckb-testnet` connection. NervDAO displayed its Dashboard, the matching connected address, 10,000 CKB balance, zero deposited/redeeming balances, and no holdings. This completes the wallet-connection and funding UI check previously left unverified.
+- Opened Make a Deposit. Empty input disabled Deposit. Entering `1` displayed a 0.00018671 CKB estimated fee and enabled Deposit. Attempting to click Deposit resulted in a browser protocol timeout. Subsequent target and wallet accessibility observations and target screenshot also timed out.
+- The click outcome is uncertain; no wallet transaction-signing approval was performed. Do not infer that a transaction was sent or that accepting a below-capacity input is a proven application defect. Do not blindly repeat an uncertain action.
+- Deposit confirmation, cancellation/error handling, redemption, withdrawal, repeated navigation, and reconnect persistence remain unverified. The browser-wide observation failure is an execution blocker, not an established app regression.
