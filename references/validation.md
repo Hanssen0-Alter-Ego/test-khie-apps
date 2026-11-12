@@ -19,3 +19,13 @@
 - Opened Make a Deposit. Empty input disabled Deposit. Entering `1` displayed a 0.00018671 CKB estimated fee and enabled Deposit. Attempting to click Deposit resulted in a browser protocol timeout. Subsequent target and wallet accessibility observations and target screenshot also timed out.
 - The click outcome is uncertain; no wallet transaction-signing approval was performed. Do not infer that a transaction was sent or that accepting a below-capacity input is a proven application defect. Do not blindly repeat an uncertain action.
 - Deposit confirmation, cancellation/error handling, redemption, withdrawal, repeated navigation, and reconnect persistence remain unverified. The browser-wide observation failure is an execution blocker, not an established app regression.
+
+## 2026-11-12 follow-up and crash diagnosis
+
+- Reconciled the earlier uncertain 1 CKB attempt: the prior wallet retained its original 10,000 CKB live cell, exactly one committed transaction (faucet), zero pending transactions, and zero DAO deposits. No deposit occurred.
+- After a clean browser session, another disposable signer received 10,000 test CKB in transaction https://testnet.explorer.nervos.org/transaction/0xcf8b15a9512ab83b7bdae5e8a035950011296bfc624a314a7a03433b7de9930e (block 23,038,105, six confirmations observed).
+- Pairing initially returned `All multiaddr dials failed`. Reloading only the target app and generating a fresh connector invitation recovered pairing while preserving the wallet page. Connection approval and the funded NervDAO dashboard worked.
+- Entered 200 test CKB and observed fee estimate 0.00018671. After clarified user authority for this separate live test, clicking Deposit changed the button to disabled `To be confirmed`; no wallet signing approval was performed.
+- Native desktop observation identified the subsequent blocker: both NervDAO and CCC App Chromium renderers displayed crash error code 9 (`Can't open this page` / `Aw, Snap!`). This is stronger evidence than protocol timeout but does not establish a root cause or a product regression. Do not infer out-of-memory without relevant browser-host diagnostics.
+- Keep browser-control timeouts distinct from renderer crashes; use supported native screenshots when DOM observation is unavailable. Never retry a potentially submitted transaction without checking wallet/explorer state first. A crashed page-local signer cannot be recovered by reading browser secrets.
+- The 200 CKB request remains unconfirmed and no deposit transaction hash was observed. Deposit, redemption, and withdrawal behavior remain unvalidated. No recurring monitor was created.
