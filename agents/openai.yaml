@@ -1,0 +1,4 @@
+interface:
+  display_name: "Test Khie-compatible Apps"
+  short_description: "Test CKB apps with CCC wallet, Khie and faucet"
+  default_prompt: "Use $test-khie-apps to test this Khie-compatible app on CKB testnet and report actual coverage."
